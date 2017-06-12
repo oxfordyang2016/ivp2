@@ -1,0 +1,71 @@
+#!/bin/bash
+echo "=============================Enter installazition================="
+
+#install dev tool
+yum groupinstall 'Development Tools'
+yum install python-dev
+yum install jemalloc-devel
+
+
+
+#install database
+yum -y install mariadb-server mariadb
+yum install MySQL-python -y
+
+
+
+#install  redis-server
+wget http://download.redis.io/redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz
+cd redis-stable
+make
+./src/redis-server --daemonize yes
+
+
+#config mariadb password
+systemctl enable mariadb
+systemctl start mariadb
+sleep 5
+mysqladmin -u root password "123456" >/dev/null 2>&1
+sytemctl stop firewalld 
+
+
+
+
+
+
+#install python-pip
+sudo yum install python-pip
+
+#install redis client moudle
+sudo pip install redis
+sudo pip install requests
+sudo pip install flask
+
+
+#start ivp service
+python ../ivp.py&python ../encoder.py&python ../decoder.py&python ../smip.py>smiplog
+
+echo "=====================================>"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
