@@ -3,7 +3,7 @@ echo "=============================Enter installazition================="
 
 #install dev tool
 yum groupinstall 'Development Tools'
-yum install python-dev
+yum install python-devel
 yum install jemalloc-devel
 
 
